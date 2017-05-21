@@ -209,9 +209,9 @@ def merge(*iterables, **kwargs):  #{
 
     h = []
     h_append = h.append
-    for itnum, it in enumerate(map(iter, iterables)):
+    for itnum, it in enumerate(list(map(iter, iterables))):
         try:
-            next = it.next
+            next = it.__next__
             val  = next()
             h_append([key( val ), val, itnum, next])
         except _StopIteration:
@@ -234,11 +234,11 @@ def merge(*iterables, **kwargs):  #{
 
 #{  perform self-tests
 if __name__ == '__main__':
-    print 'Running self-tests...'
+    print('Running self-tests...')
 
     from doctest import testmod
     failed, total = testmod()
 
     if not failed:
-        print 'OK, %d test(s) passed' % total
+        print('OK, %d test(s) passed' % total)
 #}
